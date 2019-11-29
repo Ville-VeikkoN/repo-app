@@ -1,5 +1,5 @@
 import React, {Component, useEffect} from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
 import store from '../store/store';
 import { changeValue, fetchData, getUsername, requestRepos } from '../actions';
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,7 +36,9 @@ function Search({navigation}) {
         onChangeText={(e) => 
         onValueChange(e)}>
       </TextInput>
-      <Button title='Search' onPress={() => searchButtonPressed()}></Button>
+      <TouchableOpacity onPress={() => searchButtonPressed()}>
+          <Text style={styles.searchButton}>Search</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -48,6 +50,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: '50%'
     //justifyContent: 'center',
+  },
+  searchButton : {
+    color:'blue',
+    fontSize: 20,
   },
   searchBox: {
     height: 40,
@@ -64,7 +70,12 @@ const styles = StyleSheet.create({
 });
 
 Search.navigationOptions = ({navigation}) => ({
-  title: 'Search for user',
+  headerTitle: 'Search for user',
+  headerTitleStyle: {
+    textAlign: 'center',
+    flexGrow:1,
+    alignSelf:'center',
+  },
 });
 
 export default Search;

@@ -1,21 +1,28 @@
 import React, {Component, useEffect} from 'react';
-import { FlatList,StyleSheet, Text, View, TextInput, Button, Image, ActivityIndicator, Alert } from 'react-native';
+import { FlatList,StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import store from '../store/store';
 import { changeValue, fetchData } from '../actions';
 import { useDispatch, useSelector } from 'react-redux'
+import { Card } from 'react-native-elements';
+
 
 export default function Repositories({navigation}) {
   const dispatch = useDispatch();
   let response = useSelector(state => state.response);
-  let search = useSelector(state => state.search);
+  let searchValue = useSelector(state => state.searchValue);
 
   useEffect(() => {
-    console.log(response);
     if(response.notfound) {
       alert('Username Not Found');
       navigation.goBack();
     }
   });
+
+  function getParsedDate(date) {
+    date = String(date).split('T');
+    splittedDate = String(date[0]).split('-');
+    return splittedDate[2]+'.'+splittedDate[1]+'.'+splittedDate[0];
+  }
 
   if(response.loading) {
     return(
@@ -26,12 +33,29 @@ export default function Repositories({navigation}) {
   } else {
     return (
       <View style={styles.container}>
-        <Text>Lista tähän</Text>
+        <View style={styles.account_container}>
+          {response.notfound ? <Text></Text> : 
+            <Image
+            style={{width: 90, height: 90}}
+            source={{uri: response.repos[0].owner.avatar_url}}
+            />
+          }
+          <Text style={styles.username}>{searchValue}</Text>
+        </View>
         <FlatList
           data={response.repos}
           keyExtractor={item => item.full_name}
           renderItem={({item}) => 
-          <Text style={styles.item}>{item.full_name}</Text>}
+          <TouchableOpacity onPress={() => navigation.navigate('Commits', {repo: item})}>
+            <Card>
+              <View style={styles.flatList}>
+                <Text style={{fontSize: 18}}>{item.name}</Text>
+                <Text style={{fontSize: 18}}>{getParsedDate(item.created_at)}</Text>
+              </View>
+            </Card>
+          </TouchableOpacity>
+
+          }
         />
       </View>
     );
@@ -42,19 +66,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  account_container: {
+    alignItems: 'center',
   },
   activityIndicator: {
     transform: [{scale: 3}],
+  },
+  flatList: {
+    padding: 10,
+    height: 44,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    alignContent: 'stretch',
+  },
+  username: {
+    fontSize: 20,
+    marginBottom: 20,
   }
 });
 
 Repositories.navigationOptions = ({navigation}) => ({
-  title: 'Repositories',
+  headerTitle: 'Repositories',
+  headerTitleStyle: {
+    textAlign: 'center',
+    flexGrow:1,
+    alignSelf:'center',
+  },
 })
