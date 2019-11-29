@@ -1,12 +1,30 @@
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import React from 'react'
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import { Ionicons } from '@expo/vector-icons';
-import SearchScreen from './components/SearchScreen'
-import RepositoriesScreen from './components/RepositoriesScreen'
-import CommitsScreen from './components/CommitsScreen'
-import OneCommitScreen from './components/OneCommitScreen'
+import SearchScreen from './screens/SearchScreen'
+import RepositoriesScreen from './screens/RepositoriesScreen'
+import CommitsScreen from './screens/CommitsScreen'
+import OneCommitScreen from './screens/OneCommitScreen';
+import { Provider } from 'react-redux';
+import store from './store/store'
+
+export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
+      <Provider store={store}>
+        <AppContainer/>
+      </Provider>
+    )
+  }
+}
+
+const state = store.getState();
 
 const MainNavigation = createStackNavigator({
   Search: { screen: SearchScreen },
@@ -15,8 +33,4 @@ const MainNavigation = createStackNavigator({
   OneCommit: { screen: OneCommitScreen },
 });
 
-
-
-const App = createAppContainer(MainNavigation);
-
-export default App; 
+const AppContainer = createAppContainer(MainNavigation);
