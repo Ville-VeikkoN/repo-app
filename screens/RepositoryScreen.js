@@ -72,6 +72,7 @@ export default function Repositories({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'stretch',
@@ -99,7 +100,10 @@ const styles = StyleSheet.create({
 });
 
 Repositories.navigationOptions = ({navigation}) => ({
-  headerTitle: 'Repositories',
+  headerStyle: {
+    backgroundColor:'#F0F0F0',
+  },
+  headerTitle: navigation.getParam('searchValue', 'Repositories'),
   headerTitleStyle: {
     textAlign: 'center',
     flexGrow:1,

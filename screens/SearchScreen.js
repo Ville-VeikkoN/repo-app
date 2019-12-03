@@ -8,10 +8,6 @@ function Search({navigation}) {
   const dispatch = useDispatch();
   const searchValue = useSelector(state => state.searchValue);
 
-  useEffect(() => {
-
-  });
-
   function onValueChange(e) {
     dispatch(changeValue(e));
   }
@@ -20,7 +16,7 @@ function Search({navigation}) {
     const state = store.getState();
     if(state.searchValue !== '') {
       dispatch(fetchData(state.searchValue));
-      navigation.navigate('Repositories');
+      navigation.navigate('Repositories', {searchValue:state.searchValue});
     } else {
       alert('Please Enter Username');
     }
@@ -71,6 +67,9 @@ const styles = StyleSheet.create({
 });
 
 Search.navigationOptions = ({navigation}) => ({
+  headerStyle: {
+    backgroundColor:'#F0F0F0',
+  },
   headerTitle: 'Search for user',
   headerTitleStyle: {
     textAlign: 'center',

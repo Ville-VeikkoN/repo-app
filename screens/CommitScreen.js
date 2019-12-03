@@ -102,7 +102,10 @@ const styles = StyleSheet.create({
 });
 
 Commits.navigationOptions = ({navigation}) => ({
-  headerTitle: 'Commits',
+  headerStyle: {
+    backgroundColor:'#F0F0F0',
+  },
+  headerTitle: navigation.getParam('repo', 'Commits').name,
   headerTitleStyle: {
     textAlign: 'center',
     flexGrow:1,
