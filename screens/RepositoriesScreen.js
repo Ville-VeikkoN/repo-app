@@ -4,10 +4,12 @@ import store from '../store/store';
 import { changeValue, fetchData } from '../actions';
 import { useDispatch, useSelector } from 'react-redux'
 import { Card } from 'react-native-elements';
+import ImageModal from '../components/ImageModal'
 
 
 export default function Repositories({navigation}) {
   const dispatch = useDispatch();
+  const [showImg, setShowImg] = React.useState(false);
   let response = useSelector(state => state.response);
   let searchValue = useSelector(state => state.searchValue);
 
@@ -24,6 +26,10 @@ export default function Repositories({navigation}) {
     return splittedDate[2]+'.'+splittedDate[1]+'.'+splittedDate[0];
   }
 
+  function handleModalClose() {
+    setShowImg(false);
+  }
+
   if(response.loading) {
     return(
       <View style={styles.container}>
@@ -34,11 +40,13 @@ export default function Repositories({navigation}) {
     return (
       <View style={styles.container}>
         <View style={styles.accountcontainer}>
-          {response.notfound ? <Text></Text> : 
-            <Image
-              style={{width: 90, height: 90}}
-              source={{uri: response.repos[0].owner.avatar_url}}
-            />
+          {!response.notfound && 
+            <TouchableOpacity onPress={() => setShowImg(!showImg)}>
+              <Image
+                style={{width: 90, height: 90}}
+                source={{uri: response.repos[0].owner.avatar_url}}
+              />
+            </TouchableOpacity>
           }
           <Text style={styles.username}>{searchValue}</Text>
         </View>
@@ -54,9 +62,9 @@ export default function Repositories({navigation}) {
               </View>
             </Card>
           </TouchableOpacity>
-
           }
         />
+        {showImg && <ImageModal uri={response.repos[0].owner.avatar_url} handleClose={handleModalClose}></ImageModal>}
       </View>
     );
   }
