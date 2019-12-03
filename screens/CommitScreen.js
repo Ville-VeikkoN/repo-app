@@ -21,7 +21,7 @@ export default function Commits({navigation}) {
       fetch(allCommitsUrl)
         .then((res) => res.json())
         .then((jsonRes) => {
-          setCommits(jsonRes)
+          setCommits(jsonRes.slice(0, 10))
           setLoading(false);
         })
         .catch((error) => console.log(error));

@@ -3,8 +3,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import SearchScreen from './screens/SearchScreen'
-import RepositoriesScreen from './screens/RepositoriesScreen'
-import CommitsScreen from './screens/CommitsScreen'
+import RepositoryScreen from './screens/RepositoryScreen'
+import CommitScreen from './screens/CommitScreen'
 import { Provider } from 'react-redux';
 import store from './store/store'
 
@@ -27,8 +27,8 @@ const state = store.getState();
 
 const MainNavigation = createStackNavigator({
   Search: { screen: SearchScreen },
-  Repositories: { screen: RepositoriesScreen },
-  Commits: { screen: CommitsScreen },
+  Repositories: { screen: RepositoryScreen },
+  Commits: { screen: CommitScreen },
 });
 
 const AppContainer = createAppContainer(MainNavigation);
