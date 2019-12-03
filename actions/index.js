@@ -27,7 +27,7 @@ export function fetchData(username) {
           } else {
             dispatch(receivedRepos(jsonRes));
           }
-        }, 1500);
+        }, 1000);
       })
       .catch((error) => console.log(error));
   }

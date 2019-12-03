@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, Button, Image } from 'react-native';
 import { Provider } from "react-redux";
 import { Card } from 'react-native-elements';
-import Modal from "react-native-modal";
+import Modal from 'react-native-modal';
+import CommitModal from '../components/CommitModal'
 
 
 export default function Commits({navigation}) {
@@ -10,6 +11,10 @@ export default function Commits({navigation}) {
   const allCommitsUrl = String(repo.commits_url).replace('{/sha}', '');
   const [loading, setLoading] = useState(true);
   const [commits, setCommits] = useState([]);
+  const [modalInfo, setModalInfo] = useState({
+    showModal: false,
+    commit: []
+  });
 
   useEffect(() => {
     setTimeout(()=>{
@@ -21,7 +26,7 @@ export default function Commits({navigation}) {
         })
         .catch((error) => console.log(error));
       
-    },1500);
+    },1000);
   },[]);
 
   function getParsedDate(date) {
@@ -30,10 +35,17 @@ export default function Commits({navigation}) {
     return splittedDate[2]+'.'+splittedDate[1]+'.'+splittedDate[0];
   }
 
+  function handleModalClose() {
+    setModalInfo({
+      ...modalInfo,
+      showModal: false,
+    });
+  }
+
   if(loading) {
     return(
       <View style={styles.container}>
-        <ActivityIndicator size='large' color='#000000' style={styles.activityIndicator} />
+        <ActivityIndicator size='large' color='#000000' style={styles.indicator} />
       </View>
     );
   } else {
@@ -43,16 +55,23 @@ export default function Commits({navigation}) {
           data={commits}
           keyExtractor={item => item.sha}
           renderItem={({item}) => 
-          <TouchableOpacity onPress={() => console.log('commit clicked')}>
-            <Card>
-              <View style={styles.flatList}>
-                <Text style={{fontSize: 18}}>{item.commit.author.name}</Text>
-                <Text style={{fontSize: 18}}>{getParsedDate(item.commit.author.date)}</Text>
-              </View>
-            </Card>
-          </TouchableOpacity>
-          }
+            <TouchableOpacity onPress={() => {
+              setModalInfo({
+                showModal: true,
+                commit: item
+              });
+              }}>
+              <Card>
+                <View style={styles.flatList}>
+                  <Text style={{fontSize: 18}}>{item.commit.committer.name}</Text>
+                  <Text style={{fontSize: 18}}>{getParsedDate(item.commit.committer.date)}</Text>
+                </View>
+              </Card>
+            </TouchableOpacity>}
         />
+        {modalInfo.showModal &&
+          <CommitModal commit={modalInfo.commit} handleClose={handleModalClose}></CommitModal>
+        }
       </View>
     );
   }
@@ -65,18 +84,21 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     justifyContent: 'center',
   },
-  activityIndicator: {
+  indicator: {
     transform: [{scale: 3}],
   },
   flatList: {
     padding: 10,
-    height: 44,
+    minHeight: 44,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     alignContent: 'stretch',
   },
+  modal: {
+    alignContent: 'center',
+  }
 });
 
 Commits.navigationOptions = ({navigation}) => ({
@@ -85,14 +107,5 @@ Commits.navigationOptions = ({navigation}) => ({
     textAlign: 'center',
     flexGrow:1,
     alignSelf:'center',
-  },
-  flatList: {
-    padding: 10,
-    height: 44,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    alignContent: 'stretch',
   },
 })

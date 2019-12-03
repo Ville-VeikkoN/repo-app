@@ -5,7 +5,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SearchScreen from './screens/SearchScreen'
 import RepositoriesScreen from './screens/RepositoriesScreen'
 import CommitsScreen from './screens/CommitsScreen'
-import OneCommitScreen from './screens/OneCommitScreen';
 import { Provider } from 'react-redux';
 import store from './store/store'
 
@@ -30,7 +29,6 @@ const MainNavigation = createStackNavigator({
   Search: { screen: SearchScreen },
   Repositories: { screen: RepositoriesScreen },
   Commits: { screen: CommitsScreen },
-  OneCommit: { screen: OneCommitScreen },
 });
 
 const AppContainer = createAppContainer(MainNavigation);

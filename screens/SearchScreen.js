@@ -30,14 +30,14 @@ function Search({navigation}) {
     <View style={styles.container}>
       <Image style={styles.image} source={require('../assets/Octocat.png')}></Image>
       <TextInput
-        style={styles.searchBox} 
+        style={styles.searchbox} 
         value={searchValue} 
         placeholder='Enter GitHub account' 
         onChangeText={(e) => 
         onValueChange(e)}>
       </TextInput>
       <TouchableOpacity onPress={() => searchButtonPressed()}>
-          <Text style={styles.searchButton}>Search</Text>
+          <Text style={styles.searchbutton}>Search</Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,16 +51,17 @@ const styles = StyleSheet.create({
     marginTop: '50%'
     //justifyContent: 'center',
   },
-  searchButton : {
+  searchbutton : {
     color:'blue',
     fontSize: 20,
   },
-  searchBox: {
+  searchbox: {
     height: 40,
     width: '95%',
     borderWidth: 1,
     borderColor: 'gray',
     marginBottom: 10,
+    paddingLeft: 10,
   },
   image: {
     width: 200,
