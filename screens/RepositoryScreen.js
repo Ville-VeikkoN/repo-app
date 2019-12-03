@@ -57,8 +57,8 @@ export default function Repositories({navigation}) {
           <TouchableOpacity onPress={() => navigation.navigate('Commits', {repo: item})}>
             <Card>
               <View style={styles.flatlist}>
-                <Text style={{fontSize: 18}}>{item.name}</Text>
-                <Text style={{fontSize: 18}}>{getParsedDate(item.created_at)}</Text>
+                <Text style={{fontSize: 20, borderBottomWidth: 1, borderBottomColor:'gray'}}>{item.name}</Text>
+                <Text style={{fontSize: 13}}>{getParsedDate(item.created_at)}</Text>
               </View>
             </Card>
           </TouchableOpacity>
@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
     padding: 10,
     minHeight: 44,
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    flexDirection: 'column',
+   // justifyContent: 'space-between',
+    alignItems: 'center',
     alignContent: 'stretch',
   },
   username: {

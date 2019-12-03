@@ -20,7 +20,8 @@ export default class ImageModal extends React.Component {
           animationOut='fadeOut'
           hideModalContentWhileAnimating={true}
           backdropTransitionOutTiming={0}
-          onBackdropPress={() => this.props.handleClose()}>
+          onBackdropPress={() => this.props.handleClose()}
+          onBackButtonPress={() => this.props.handleClose()}>
           <View style={styles.modalcontent}>
             <Image
                 style={{ width: 350, height: 350}}

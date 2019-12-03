@@ -21,19 +21,21 @@ export default class CommitModal extends React.Component {
           animationOut='fadeOut'
           hideModalContentWhileAnimating={true}
           backdropTransitionOutTiming={0}
-          onBackdropPress={() => this.props.handleClose()}>
+          onBackdropPress={() => this.props.handleClose()}
+          onBackButtonPress={() => this.props.handleClose()}>
 
           <Card title={commit.sha}>
             <View style={styles.modalcontent}>
               {commit.author != null && 
                 <Image
-                  style={{width: 90, height: 90}}
+                  style={styles.image}
                   source={{uri: commit.committer.avatar_url}}
                 />
               }
-              <Text style={{fontSize:20}}>{commit.commit.message}</Text>
+              <Text style={{fontSize:13, borderBottomColor:'gray', borderBottomWidth:1}}>Commit Message</Text>
+              <Text style={{fontSize:20, textAlign:'center'}}>{commit.commit.message}</Text>
               <TouchableOpacity onPress={() => this.props.handleClose()}>
-                <Text style={{fontSize:18, color:'blue'}}>close</Text>
+                <Text style={{fontSize:18, color:'blue', marginTop:20}}>close</Text>
               </TouchableOpacity>
             </View>
           </Card>
@@ -53,6 +55,11 @@ const styles = StyleSheet.create({
   modalcontent: {
     alignItems: 'center',
     textAlign: 'center'
+  },
+  image: {
+    height: 90,
+    width: 90,
+    marginBottom: 20,
   }
 });
 

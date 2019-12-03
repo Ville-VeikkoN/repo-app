@@ -63,8 +63,8 @@ export default function Commits({navigation}) {
               }}>
               <Card>
                 <View style={styles.flatList}>
-                  <Text style={{fontSize: 18}}>{item.commit.committer.name}</Text>
-                  <Text style={{fontSize: 18}}>{getParsedDate(item.commit.committer.date)}</Text>
+                  <Text style={{fontSize: 20, borderBottomWidth:1, borderBottomColor:'gray'}}>{item.commit.committer.name}</Text>
+                  <Text style={{fontSize: 13}}>{getParsedDate(item.commit.committer.date)}</Text>
                 </View>
               </Card>
             </TouchableOpacity>}
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     padding: 10,
     minHeight: 44,
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    flexDirection: 'column',
+   // justifyContent: 'space-between',
+    alignItems: 'center',
     alignContent: 'stretch',
   },
   modal: {
