@@ -1,12 +1,15 @@
 import React, {Component, useEffect} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
-import store from '../store/store';
-import { changeValue, fetchData, getUsername, requestRepos } from '../actions';
+import store from '../../store/store';
+import { changeValue, fetchData, getUsername, requestRepos } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux'
+import { bold } from 'ansi-colors';
+import KeepAwake, { useKeepAwake } from 'expo-keep-awake';
 
 function Search({navigation}) {
   const dispatch = useDispatch();
   const searchValue = useSelector(state => state.searchValue);
+  useKeepAwake();
 
   function onValueChange(e) {
     dispatch(changeValue(e));
@@ -24,7 +27,7 @@ function Search({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('../assets/Octocat.png')}></Image>
+      <Image style={styles.image} source={require('../../assets/Octocat.png')}></Image>
       <TextInput
         style={styles.searchbox} 
         value={searchValue} 
@@ -50,13 +53,14 @@ const styles = StyleSheet.create({
   searchbutton : {
     color:'blue',
     fontSize: 20,
+    fontWeight: 'bold'
   },
   searchbox: {
     height: 40,
     width: '95%',
     borderWidth: 1,
     borderColor: 'gray',
-    marginBottom: 10,
+    marginBottom: 20,
     paddingLeft: 10,
   },
   image: {

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, 
 import { Provider } from "react-redux";
 import { Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import CommitModal from '../components/CommitModal'
+import CommitModal from '../../components/CommitModal'
 
 
 export default function Commits({navigation}) {
@@ -51,6 +51,7 @@ export default function Commits({navigation}) {
   } else {
     return (
       <View style={styles.container}>
+        <Text style={{fontSize:13, color:'gray', textAlign:'center', padding:10}}>Click wanted commit to see more</Text>
         <FlatList
           data={commits}
           keyExtractor={item => item.sha}
@@ -63,8 +64,8 @@ export default function Commits({navigation}) {
               }}>
               <Card>
                 <View style={styles.flatList}>
-                  <Text style={{fontSize: 20, borderBottomWidth:1, borderBottomColor:'gray'}}>{item.commit.committer.name}</Text>
-                  <Text style={{fontSize: 13}}>{getParsedDate(item.commit.committer.date)}</Text>
+                  <Text style={{fontSize: 20, borderBottomWidth:1, borderBottomColor:'gray'}}>{item.commit.author.name}</Text>
+                  <Text style={{fontSize: 13}}>{getParsedDate(item.commit.author.date)}</Text>
                 </View>
               </Card>
             </TouchableOpacity>}

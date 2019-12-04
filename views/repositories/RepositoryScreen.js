@@ -1,10 +1,10 @@
 import React, {Component, useEffect} from 'react';
 import { FlatList,StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
-import store from '../store/store';
-import { changeValue, fetchData } from '../actions';
+import store from '../../store/store';
+import { changeValue, fetchData } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux'
 import { Card } from 'react-native-elements';
-import ImageModal from '../components/ImageModal'
+import ImageModal from '../../components/ImageModal'
 
 
 export default function Repositories({navigation}) {
@@ -49,6 +49,7 @@ export default function Repositories({navigation}) {
             </TouchableOpacity>
           }
           <Text style={styles.username}>{searchValue}</Text>
+          <Text style={{fontSize:13, color:'gray', padding:10}}>Click wanted repository to see commits</Text>
         </View>
         <FlatList
           data={response.repos}
