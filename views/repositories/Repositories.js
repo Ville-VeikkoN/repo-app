@@ -2,10 +2,11 @@ import React, {Component, useEffect} from 'react';
 import { FlatList,StyleSheet, Text, View, TextInput, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import store from '../../store/store';
 import { changeValue, fetchData } from '../../actions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Card } from 'react-native-elements';
-import ImageModal from '../../components/ImageModal'
-
+import ImageModal from '../../components/image/ImageModal';
+import styles from '../../Styles';
+import repositoriesStyle from './Repositories.style';
 
 export default function Repositories({navigation}) {
   const dispatch = useDispatch();
@@ -32,14 +33,14 @@ export default function Repositories({navigation}) {
 
   if(response.loading) {
     return(
-      <View style={styles.container}>
+      <View style={repositoriesStyle.container}>
         <ActivityIndicator size='large' color='#000000' style={styles.indicator} />
       </View>
     )
   } else {
     return (
-      <View style={styles.container}>
-        <View style={styles.accountcontainer}>
+      <View style={repositoriesStyle.container}>
+        <View style={repositoriesStyle.accountContainer}>
           {!response.notfound && 
             <TouchableOpacity onPress={() => setShowImg(!showImg)}>
               <Image
@@ -48,8 +49,8 @@ export default function Repositories({navigation}) {
               />
             </TouchableOpacity>
           }
-          <Text style={styles.username}>{searchValue}</Text>
-          <Text style={{fontSize:13, color:'gray', padding:10}}>Click wanted repository to see commits</Text>
+          <Text style={repositoriesStyle.username}>{searchValue}</Text>
+          <Text style={styles.infoText}>Click wanted repository to see commits</Text>
         </View>
         <FlatList
           data={response.repos}
@@ -57,8 +58,8 @@ export default function Repositories({navigation}) {
           renderItem={({item}) => 
           <TouchableOpacity onPress={() => navigation.navigate('Commits', {repo: item})}>
             <Card>
-              <View style={styles.flatlist}>
-                <Text style={{fontSize: 20, borderBottomWidth: 1, borderBottomColor:'gray'}}>{item.name}</Text>
+              <View style={styles.flatList}>
+                <Text style={styles.cardTitle}>{item.name}</Text>
                 <Text style={{fontSize: 13}}>{getParsedDate(item.created_at)}</Text>
               </View>
             </Card>
@@ -71,43 +72,6 @@ export default function Repositories({navigation}) {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  accountcontainer: {
-    alignItems: 'center',
-  },
-  indicator: {
-    transform: [{scale: 3}],
-  },
-  flatlist: {
-    padding: 10,
-    minHeight: 44,
-    flex: 1,
-    flexDirection: 'column',
-   // justifyContent: 'space-between',
-    alignItems: 'center',
-    alignContent: 'stretch',
-  },
-  username: {
-    fontSize: 20,
-    marginBottom: 20,
-  }
-});
-
 Repositories.navigationOptions = ({navigation}) => ({
-  headerStyle: {
-    backgroundColor:'#F0F0F0',
-  },
   headerTitle: navigation.getParam('searchValue', 'Repositories'),
-  headerTitleStyle: {
-    textAlign: 'center',
-    flexGrow:1,
-    alignSelf:'center',
-  },
-})
+});

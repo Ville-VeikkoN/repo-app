@@ -2,11 +2,11 @@ import { createAppContainer } from 'react-navigation';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import SearchScreen from './views/search/SearchScreen'
-import RepositoryScreen from './views/repositories/RepositoryScreen'
-import CommitScreen from './views/commits/CommitScreen'
+import Search from './views/search/Search';
+import Repositories from './views/repositories/Repositories';
+import Commits from './views/commits/Commits';
 import { Provider } from 'react-redux';
-import store from './store/store'
+import store from './store/store';
 
 export default class App extends React.Component {
 
@@ -23,12 +23,27 @@ export default class App extends React.Component {
   }
 }
 
-const state = store.getState();
+const navigation = ({
+  headerStyle: {
+    backgroundColor:'#F0F0F0',
+  },
+  headerTitleStyle: {
+    textAlign: 'center',
+    flexGrow:1,
+    alignSelf:'center',
+  },
+})
 
 const MainNavigation = createStackNavigator({
-  Search: { screen: SearchScreen },
-  Repositories: { screen: RepositoryScreen },
-  Commits: { screen: CommitScreen },
+  Search: { screen: Search,
+    navigationOptions: navigation
+  },
+  Repositories: { screen: Repositories,
+    navigationOptions: navigation
+  },
+  Commits: { screen: Commits,
+    navigationOptions: navigation
+  },
 });
 
 const AppContainer = createAppContainer(MainNavigation);

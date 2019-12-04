@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, 
 import { Provider } from "react-redux";
 import { Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
+import commitModalStyle from './CommitModal.style'
 
 
 export default class CommitModal extends React.Component {
@@ -14,7 +15,7 @@ export default class CommitModal extends React.Component {
   render() {
     const commit = this.props.commit;
     return (
-      <View style={styles.container}>
+      <View style={commitModalStyle.container}>
         <Modal
           isVisible={true}
           animationIn='fadeIn'
@@ -25,11 +26,11 @@ export default class CommitModal extends React.Component {
           onBackButtonPress={() => this.props.handleClose()}>
 
           <Card title={commit.sha}>
-            <View style={styles.modalcontent}>
+            <View style={commitModalStyle.modalcontent}>
             <Text style={{fontSize:13, borderBottomColor:'gray', borderBottomWidth:1}}>Author</Text>
               {commit.author != null && 
                   <Image
-                    style={styles.image}
+                    style={commitModalStyle.image}
                     source={{uri: commit.author.avatar_url}}
                   />
               }
@@ -37,7 +38,7 @@ export default class CommitModal extends React.Component {
               <Text style={{fontSize:13, borderBottomColor:'gray', borderBottomWidth:1}}>Commit Message</Text>
               <Text style={{fontSize:20, textAlign:'center'}}>{commit.commit.message}</Text>
               <TouchableOpacity onPress={() => this.props.handleClose()}>
-                <Text style={{fontSize:18, color:'blue', marginTop:20}}>close</Text>
+                <Text style={commitModalStyle.closeText}>close</Text>
               </TouchableOpacity>
             </View>
           </Card>
@@ -46,25 +47,6 @@ export default class CommitModal extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  modalcontent: {
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-  image: {
-    height: 90,
-    width: 90,
-    marginTop: 2,
-    marginBottom: 2,
-  }
-});
 
 
 

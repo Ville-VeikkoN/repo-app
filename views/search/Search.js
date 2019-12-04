@@ -2,11 +2,12 @@ import React, {Component, useEffect} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
 import store from '../../store/store';
 import { changeValue, fetchData, getUsername, requestRepos } from '../../actions';
-import { useDispatch, useSelector } from 'react-redux'
-import { bold } from 'ansi-colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { bold } from 'ansi-colors';;
 import KeepAwake, { useKeepAwake } from 'expo-keep-awake';
+import searchStyles from './Search.style';
 
-function Search({navigation}) {
+export default function Search({navigation}) {
   const dispatch = useDispatch();
   const searchValue = useSelector(state => state.searchValue);
   useKeepAwake();
@@ -26,60 +27,22 @@ function Search({navigation}) {
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require('../../assets/Octocat.png')}></Image>
+    <View style={searchStyles.container}>
+      <Image style={searchStyles.image} source={require('../../assets/Octocat.png')}></Image>
       <TextInput
-        style={styles.searchbox} 
+        style={searchStyles.searchbox} 
         value={searchValue} 
         placeholder='Enter GitHub account' 
         onChangeText={(e) => 
         onValueChange(e)}>
       </TextInput>
       <TouchableOpacity onPress={() => searchButtonPressed()}>
-          <Text style={styles.searchbutton}>Search</Text>
+          <Text style={searchStyles.searchbutton}>Search</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    marginTop: '50%'
-    //justifyContent: 'center',
-  },
-  searchbutton : {
-    color:'blue',
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  searchbox: {
-    height: 40,
-    width: '95%',
-    borderWidth: 1,
-    borderColor: 'gray',
-    marginBottom: 20,
-    paddingLeft: 10,
-  },
-  image: {
-    width: 200,
-    height: 200,
-    marginBottom: 10,
-  }
-});
-
 Search.navigationOptions = ({navigation}) => ({
-  headerStyle: {
-    backgroundColor:'#F0F0F0',
-  },
   headerTitle: 'Search for user',
-  headerTitleStyle: {
-    textAlign: 'center',
-    flexGrow:1,
-    alignSelf:'center',
-  },
 });
-
-export default Search;

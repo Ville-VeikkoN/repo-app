@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, 
 import { Provider } from "react-redux";
 import { Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import CommitModal from '../../components/CommitModal'
+import CommitModal from '../../components/commit/CommitModal';
+import styles from '../../Styles';
+import commitsStyle from './Commits.style';
 
 
 export default function Commits({navigation}) {
@@ -50,8 +52,8 @@ export default function Commits({navigation}) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        <Text style={{fontSize:13, color:'gray', textAlign:'center', padding:10}}>Click wanted commit to see more</Text>
+      <View style={commitsStyle.container}>
+        <Text style={styles.infoText}>Click wanted commit to see more</Text>
         <FlatList
           data={commits}
           keyExtractor={item => item.sha}
@@ -64,7 +66,7 @@ export default function Commits({navigation}) {
               }}>
               <Card>
                 <View style={styles.flatList}>
-                  <Text style={{fontSize: 20, borderBottomWidth:1, borderBottomColor:'gray'}}>{item.commit.author.name}</Text>
+                  <Text style={styles.cardTitle}>{item.commit.author.name}</Text>
                   <Text style={{fontSize: 13}}>{getParsedDate(item.commit.author.date)}</Text>
                 </View>
               </Card>
@@ -78,38 +80,6 @@ export default function Commits({navigation}) {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  indicator: {
-    transform: [{scale: 3}],
-  },
-  flatList: {
-    padding: 10,
-    minHeight: 44,
-    flex: 1,
-    flexDirection: 'column',
-   // justifyContent: 'space-between',
-    alignItems: 'center',
-    alignContent: 'stretch',
-  },
-  modal: {
-    alignContent: 'center',
-  }
-});
-
 Commits.navigationOptions = ({navigation}) => ({
-  headerStyle: {
-    backgroundColor:'#F0F0F0',
-  },
   headerTitle: navigation.getParam('repo', 'Commits').name,
-  headerTitleStyle: {
-    textAlign: 'center',
-    flexGrow:1,
-    alignSelf:'center',
-  },
-})
+});

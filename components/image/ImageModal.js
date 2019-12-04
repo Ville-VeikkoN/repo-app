@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, 
 import { Provider } from "react-redux";
 import { Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
+import imageModalStyle from './ImageModal.style'
 
 
 export default class ImageModal extends React.Component {
@@ -13,7 +14,7 @@ export default class ImageModal extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={imageModalStyle.container}>
         <Modal
           isVisible={true}
           animationIn='fadeIn'
@@ -22,9 +23,9 @@ export default class ImageModal extends React.Component {
           backdropTransitionOutTiming={0}
           onBackdropPress={() => this.props.handleClose()}
           onBackButtonPress={() => this.props.handleClose()}>
-          <View style={styles.modalcontent}>
+          <View style={imageModalStyle.modalcontent}>
             <Image
-                style={{ width: 350, height: 350}}
+                style={imageModalStyle.image}
                 source={{ uri: this.props.uri }}
             />
           </View>
@@ -33,20 +34,6 @@ export default class ImageModal extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalcontent: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding : 10,
-  }
-});
 
 
 
