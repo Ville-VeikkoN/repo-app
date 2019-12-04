@@ -7,7 +7,6 @@ import CommitModal from '../../components/commit/CommitModal';
 import styles from '../../Styles';
 import commitsStyle from './Commits.style';
 
-
 export default function Commits({navigation}) {
   const repo = navigation.getParam('repo', null);
   const allCommitsUrl = String(repo.commits_url).replace('{/sha}', '');
@@ -19,16 +18,23 @@ export default function Commits({navigation}) {
   });
 
   useEffect(() => {
+    var isMounted = true;
     setTimeout(()=>{
       fetch(allCommitsUrl)
         .then((res) => res.json())
         .then((jsonRes) => {
-          setCommits(jsonRes.slice(0, 10))
-          setLoading(false);
+          if(isMounted) {
+            setCommits(jsonRes.slice(0, 10))
+            setLoading(false);
+          }
         })
         .catch((error) => console.log(error));
       
     },1000);
+
+    return function cleanup() {
+      isMounted = !isMounted;
+    }
   },[]);
 
   function getParsedDate(date) {
