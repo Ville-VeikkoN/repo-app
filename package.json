@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "abortcontroller-polyfill": "^1.4.0",
+    "eslint": "^6.7.2",
+    "eslint-config-expo": "^6.0.0",
     "expo": "^35.0.0",
     "expo-keep-awake": "~7.0.0",
+    "prettier": "^1.19.1",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
@@ -29,6 +32,9 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"
+  },
+  "eslintConfig": {
+    "extends": "expo/native"
   },
   "private": true
 }

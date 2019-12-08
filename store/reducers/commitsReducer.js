@@ -1,7 +1,7 @@
 const commitsReducer = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'REQUEST_COMMITS':
-      return { 
+      return {
         ...state,
         commits: [],
         loading: true,
@@ -14,8 +14,8 @@ const commitsReducer = (state = [], action) => {
         loading: false,
         dataNotFound: false,
       };
-    case 'NOTFOUND_COMMITS': 
-      return { 
+    case 'NOTFOUND_COMMITS':
+      return {
         ...state,
         commits: [],
         loading: false,
@@ -24,8 +24,8 @@ const commitsReducer = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
-export const selectCommits = (state) => state.commits;
+export const selectCommits = state => state.commits;
 
 export default commitsReducer;

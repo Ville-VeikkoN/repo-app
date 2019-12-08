@@ -6,7 +6,7 @@ import ImageModal from '../image/ImageModal';
 import styles from '../../Styles';
 import repositoriesStyle from './Repositories.style';
 import { selectRepositories } from '../../store/reducers/repositoryReducer';
-import { getParsedDate } from '../../helpers/dateHelper'
+import { getParsedDate } from '../../helpers/dateHelper';
 
 export default function Repositories(props) {
   const [showImg, setShowImg] = React.useState(false);
@@ -16,18 +16,18 @@ export default function Repositories(props) {
     setShowImg(false);
   }
 
-  function flatListHeader () {
+  function flatListHeader() {
     const reposAmount = response.repos.length;
-    return  (
+    return (
       <View style={repositoriesStyle.accountContainer}>
-        {reposAmount > 0 &&
+        {reposAmount > 0 && (
           <TouchableOpacity onPress={() => setShowImg(!showImg)}>
             <Image
-              style={{width: 90, height: 90}}
-              source={{uri: response.repos[0].owner.avatar_url}}
+              style={repositoriesStyle.image}
+              source={{ uri: response.repos[0].owner.avatar_url }}
             />
           </TouchableOpacity>
-        }
+        )}
         <Text style={styles.infoText}>Found {reposAmount} repositories</Text>
       </View>
     );
@@ -38,19 +38,21 @@ export default function Repositories(props) {
       <FlatList
         data={response.repos}
         keyExtractor={item => item.full_name}
-        ListHeaderComponent = {flatListHeader()}
-        renderItem={({item}) => 
-        <TouchableOpacity onPress={() => props.onClickRepo(item)}>
-          <Card containerStyle={styles.cardContainer}>
-            <View style={styles.flatList}>
-              <Text style={styles.cardTitle}>{item.name}</Text>
-              <Text style={styles.dateText}>{getParsedDate(item.created_at)}</Text>
-            </View>
-          </Card>
-        </TouchableOpacity>
-        }
+        ListHeaderComponent={flatListHeader()}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => props.onClickRepo(item)}>
+            <Card containerStyle={styles.cardContainer}>
+              <View style={styles.flatList}>
+                <Text style={styles.cardTitle}>{item.name}</Text>
+                <Text style={styles.dateText}>{getParsedDate(item.created_at)}</Text>
+              </View>
+            </Card>
+          </TouchableOpacity>
+        )}
       />
-      {showImg && <ImageModal uri={response.repos[0].owner.avatar_url} handleClose={handleModalClose}></ImageModal>}
+      {showImg && (
+        <ImageModal uri={response.repos[0].owner.avatar_url} handleClose={handleModalClose} />
+      )}
     </View>
   );
 }

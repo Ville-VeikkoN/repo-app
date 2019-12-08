@@ -5,7 +5,7 @@ import { Card } from 'react-native-elements';
 import CommitModal from '../../components/commit/CommitModal';
 import styles from '../../Styles';
 import commitsStyle from './Commits.style';
-import { getParsedDate } from '../../helpers/dateHelper'
+import { getParsedDate } from '../../helpers/dateHelper';
 import { selectCommits } from '../../store/reducers/commitsReducer';
 import { fetchCommits } from '../../store/actions';
 
@@ -19,7 +19,7 @@ export default function Commits({navigation}) {
   const commits = useSelector(selectCommits);
   const [modalInfo, setModalInfo] = useState({
     showModal: false,
-    commit: []
+    commit: [],
   });
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Commits({navigation}) {
             <TouchableOpacity onPress={() => {
               setModalInfo({
                 showModal: true,
-                commit: item
+                commit: item,
               });
               }}>
               <Card containerStyle={styles.cardContainer}>

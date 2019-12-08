@@ -18,18 +18,18 @@ const commitModalStyle = StyleSheet.create({
     marginBottom: 2,
   },
   closeText: {
-    fontSize:18,
-    color:'blue',
-    marginTop:20
+    fontSize: 18,
+    color: 'blue',
+    marginTop: 20,
   },
   infoTitle: {
-    fontSize:13,
-    borderBottomColor:'gray',
-    borderBottomWidth:1
+    fontSize: 13,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
   },
   message: {
-    fontSize:20,
-    textAlign:'center'
+    fontSize: 20,
+    textAlign: 'center',
   }
 });
 

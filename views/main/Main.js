@@ -1,15 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
+import { useKeepAwake } from 'expo-keep-awake';
 import { View, TextInput, Image, Keyboard, ActivityIndicator } from 'react-native';
 import { changeSearchValue, fetchRepos } from '../../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useKeepAwake } from 'expo-keep-awake';
 import mainStyle from './Main.style';
-import Repositories from '../../components/repositories/Repositories'
-import { selectRepositories } from '../../store/reducers/repositoryReducer'
-import { selectSearchValue } from '../../store/reducers/searchReducer'
-import { Feather } from '@expo/vector-icons';
+import Repositories from '../../components/repositories/Repositories';
+import { selectRepositories } from '../../store/reducers/repositoryReducer';
+import { selectSearchValue } from '../../store/reducers/searchReducer';
 
-export default function Main({navigation}) {
+export default function Main({ navigation }) {
   const dispatch = useDispatch();
   const repos = useSelector(selectRepositories);
   const searchValue = useSelector(selectSearchValue);
@@ -24,35 +24,42 @@ export default function Main({navigation}) {
 
   function searchButtonPressed() {
     setTouched(true);
-    if(searchValue !== '') {
+    if (searchValue !== '') {
       dispatch(fetchRepos(searchValue));
       Keyboard.dismiss();
     }
   }
 
   function onClickRepo(repository) {
-    navigation.navigate('Commits', {repo: repository})
+    navigation.navigate('Commits', { repo: repository })
   }
 
   return (
     <View style={mainStyle.viewContainer}>
-      <Image style={mainStyle.image} source={require('../../assets/Octocat.png')}></Image>
+      <Image style={mainStyle.image} source={require('../../assets/Octocat.png')} />
       <View style={mainStyle.container}>
         <TextInput
-          style={touched && repos.dataNotFound ? mainStyle.inputInvalid :  mainStyle.input} 
-          value={searchValue} 
-          placeholder='Enter GitHub account' 
-          onChangeText={(e) => onValueChange(e)}
+          style={touched && repos.dataNotFound ? mainStyle.inputInvalid : mainStyle.input}
+          value={searchValue}
+          placeholder="Enter GitHub account"
+          onChangeText={e => onValueChange(e)}
           onSubmitEditing={() => searchButtonPressed()}
         />
-        {repos.loading && <ActivityIndicator size='large' color='#000000' style={mainStyle.indicator}/>} 
-        <Feather name='search' size={38} style={mainStyle.searchButton} onPress={() => searchButtonPressed()}/>
+        {repos.loading && (
+          <ActivityIndicator size="large" color="#000000" style={mainStyle.indicator} /> 
+        )}
+        <Feather
+          name="search"
+          size={38}
+          style={mainStyle.searchButton}
+          onPress={() => searchButtonPressed()}
+        />
       </View>
-      {repos.dataFound && <Repositories onClickRepo={onClickRepo}/>}
+      {repos.dataFound && <Repositories onClickRepo={onClickRepo} />}
     </View>
   );
 }
 
-Main.navigationOptions = ({navigation}) => ({
+Main.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Search for user',
 });

@@ -1,7 +1,7 @@
 const repositoryReducer = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'REQUEST_REPOS':
-      return { 
+      return {
         ...state,
         repos: [],
         dataFound: false,
@@ -16,8 +16,8 @@ const repositoryReducer = (state = [], action) => {
         loading: false,
         dataNotFound: false,
       };
-    case 'NOTFOUND_REPOS': 
-      return { 
+    case 'NOTFOUND_REPOS':
+      return {
         ...state,
         repos: [],
         dataFound: false,
@@ -27,8 +27,8 @@ const repositoryReducer = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
-export const selectRepositories = (state) => state.repos;
+export const selectRepositories = state => state.repos;
 
 export default repositoryReducer;

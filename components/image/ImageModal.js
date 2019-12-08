@@ -5,33 +5,22 @@ import imageModalStyle from './ImageModal.style'
 
 
 export default class ImageModal extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <View style={imageModalStyle.container}>
         <Modal
           isVisible={true}
-          animationIn='fadeIn'
-          animationOut='fadeOut'
+          animationIn="fadeIn"
+          animationOut="fadeOut"
           hideModalContentWhileAnimating={true}
           backdropTransitionOutTiming={0}
           onBackdropPress={() => this.props.handleClose()}
           onBackButtonPress={() => this.props.handleClose()}>
           <View style={imageModalStyle.modalcontent}>
-            <Image
-                style={imageModalStyle.image}
-                source={{ uri: this.props.uri }}
-            />
+            <Image style={imageModalStyle.image} source={{ uri: this.props.uri }} />
           </View>
         </Modal>
       </View>
     );
   }
 }
-
-
-

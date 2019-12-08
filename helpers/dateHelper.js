@@ -1,5 +1,5 @@
-export const getParsedDate = (date) => {
+export const getParsedDate = date => {
   date = String(date).split('T');
-  splittedDate = String(date[0]).split('-');
-  return splittedDate[2]+'.'+splittedDate[1]+'.'+splittedDate[0];
-}
+  var splittedDate = String(date[0]).split('-');
+  return splittedDate[2] + '.' + splittedDate[1] + '.' + splittedDate[0];
+};

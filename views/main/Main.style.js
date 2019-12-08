@@ -11,25 +11,25 @@ const searchStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  searchButton : {
+  searchButton: {
     marginRight: 10,
     marginLeft: 10,
   },
   input: {
     height: 40,
-    flex:1,
+    flex: 1,
     borderWidth: 1,
     borderColor: 'gray',
     marginLeft: 10,
-    paddingLeft:10,
+    paddingLeft: 10,
   },
   inputInvalid: {
     height: 40,
-    flex:1,
+    flex: 1,
     borderWidth: 2,
     borderColor: 'red',
     marginLeft: 10,
-    paddingLeft:10,
+    paddingLeft: 10,
   },
   image: {
     width: 100,
@@ -39,7 +39,7 @@ const searchStyles = StyleSheet.create({
   indicator: {
     position: 'absolute',
     right: 60,
-  }
-})
+  },
+});
 
 export default searchStyles;
