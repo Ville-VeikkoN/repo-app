@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, Button, Image } from 'react-native';
-import { Provider } from "react-redux";
-import { Card } from 'react-native-elements';
+import React from 'react';
+import { View, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import imageModalStyle from './ImageModal.style'
 

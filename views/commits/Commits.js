@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, FlatList, Button, Image } from 'react-native';
-import { Provider } from "react-redux";
+import { Text, View, ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
+import { useSelector, useDispatch } from "react-redux";
 import { Card } from 'react-native-elements';
-import Modal from 'react-native-modal';
 import CommitModal from '../../components/commit/CommitModal';
 import styles from '../../Styles';
 import commitsStyle from './Commits.style';
-
+import { getParsedDate } from '../../helpers/dateHelper'
+import { selectCommits } from '../../store/reducers/commitsReducer';
+import { fetchCommits } from '../../store/actions';
 
 export default function Commits({navigation}) {
+  const AbortController = window.AbortController;
+  const controller = new AbortController();
+  const dispatch = useDispatch();
   const repo = navigation.getParam('repo', null);
   const allCommitsUrl = String(repo.commits_url).replace('{/sha}', '');
   const [loading, setLoading] = useState(true);
-  const [commits, setCommits] = useState([]);
+  const commits = useSelector(selectCommits);
   const [modalInfo, setModalInfo] = useState({
     showModal: false,
     commit: []
   });
 
   useEffect(() => {
-    setTimeout(()=>{
-      fetch(allCommitsUrl)
-        .then((res) => res.json())
-        .then((jsonRes) => {
-          setCommits(jsonRes.slice(0, 10))
-          setLoading(false);
-        })
-        .catch((error) => console.log(error));
-      
-    },1000);
-  },[]);
+    const signal = controller.signal;
 
-  function getParsedDate(date) {
-    date = String(date).split('T');
-    splittedDate = String(date[0]).split('-');
-    return splittedDate[2]+'.'+splittedDate[1]+'.'+splittedDate[0];
-  }
+    dispatch(fetchCommits(allCommitsUrl, signal))
+    setTimeout(() => {
+      setLoading(false);
+    },1000);
+
+    return function cleanup() {
+      controller.abort();
+    }
+  },[]);
 
   function handleModalClose() {
     setModalInfo({
@@ -51,12 +49,14 @@ export default function Commits({navigation}) {
       </View>
     );
   } else {
+    const commitsData = commits.commits.slice(0,10);
     return (
       <View style={commitsStyle.container}>
-        <Text style={styles.infoText}>Click wanted commit to see more</Text>
+        <Text style={styles.infoText}>{commitsData.length} commits</Text>
         <FlatList
-          data={commits}
+          data={commitsData}
           keyExtractor={item => item.sha}
+          initialNumToRender={10}
           renderItem={({item}) => 
             <TouchableOpacity onPress={() => {
               setModalInfo({
@@ -64,7 +64,7 @@ export default function Commits({navigation}) {
                 commit: item
               });
               }}>
-              <Card>
+              <Card containerStyle={styles.cardContainer}>
                 <View style={styles.flatList}>
                   <Text style={styles.cardTitle}>{item.commit.author.name}</Text>
                   <Text style={{fontSize: 13}}>{getParsedDate(item.commit.author.date)}</Text>

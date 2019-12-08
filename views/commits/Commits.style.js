@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const commitsStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fef6fb',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
