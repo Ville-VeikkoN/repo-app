@@ -1,12 +1,12 @@
 import { createAppContainer } from 'react-navigation';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import Search from './views/search/Search';
-import Repositories from './views/repositories/Repositories';
+import Repositories from './components/repositories/Repositories';
 import Commits from './views/commits/Commits';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import 'abortcontroller-polyfill';
 
 export default class App extends React.Component {
 
@@ -25,12 +25,10 @@ export default class App extends React.Component {
 
 const navigation = ({
   headerStyle: {
-    backgroundColor:'#F0F0F0',
+    backgroundColor:'#46b3e6',
   },
   headerTitleStyle: {
-    textAlign: 'center',
     flexGrow:1,
-    alignSelf:'center',
   },
 })
 
