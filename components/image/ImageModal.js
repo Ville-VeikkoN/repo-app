@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import Modal from 'react-native-modal';
-import imageModalStyle from './ImageModal.style'
-
+import imageModalStyle from './ImageModal.style';
 
 export default class ImageModal extends React.Component {
   render() {

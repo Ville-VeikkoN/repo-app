@@ -9,7 +9,7 @@ const commitModalStyle = StyleSheet.create({
   },
   modalcontent: {
     alignItems: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   image: {
     height: 90,
@@ -30,7 +30,7 @@ const commitModalStyle = StyleSheet.create({
   message: {
     fontSize: 20,
     textAlign: 'center',
-  }
+  },
 });
 
 export default commitModalStyle;

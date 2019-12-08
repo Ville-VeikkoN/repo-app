@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import commitModalStyle from './CommitModal.style'
+import commitModalStyle from './CommitModal.style';
 import styles from '../../Styles';
-import { getParsedDate } from '../../helpers/dateHelper'
+import { getParsedDate } from '../../helpers/dateHelper';
 
 export default class CommitModal extends React.Component {
   render() {
