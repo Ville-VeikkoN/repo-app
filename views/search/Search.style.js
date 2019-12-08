@@ -1,30 +1,44 @@
 import { StyleSheet } from 'react-native';
 
 const searchStyles = StyleSheet.create({
-  container: {
+  viewContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fef6fb',
     alignItems: 'center',
-    marginTop: '50%'
-    //justifyContent: 'center',
   },
-  searchbutton : {
-    color:'blue',
-    fontSize: 20,
-    fontWeight: 'bold'
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
-  searchbox: {
+  searchButton : {
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  input: {
     height: 40,
-    width: '95%',
+    flex:1,
     borderWidth: 1,
     borderColor: 'gray',
-    marginBottom: 20,
-    paddingLeft: 10,
+    marginLeft: 10,
+    paddingLeft:10,
+  },
+  inputInvalid: {
+    height: 40,
+    flex:1,
+    borderWidth: 2,
+    borderColor: 'red',
+    marginLeft: 10,
+    paddingLeft:10,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     marginBottom: 10,
+  },
+  indicator: {
+    position: 'absolute',
+    right: 60,
   }
 })
 

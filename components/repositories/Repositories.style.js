@@ -2,19 +2,19 @@ import { StyleSheet } from 'react-native';
 
 const repositoriesStyle = StyleSheet.create({
   container: {
+    flex:1,
+    width:'100%',
+    paddingTop:10,
+    borderTopWidth:1,
+    borderTopColor:'#d6e5fa',
     marginTop: 20,
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fef6fb',
     alignItems: 'stretch',
     justifyContent: 'center',
   },
   accountContainer: {
     alignItems: 'center',
   },
-  username: {
-    fontSize: 20,
-    marginBottom: 20,
-  }
 });
 
 export default repositoriesStyle;
