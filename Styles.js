@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderBottomWidth: 1,
     borderBottomColor:'gray'
+  },
+  cardContainer:{
+    backgroundColor:'#d6e5fa'
+  },
+  username: {
+    fontSize: 20,
+    marginBottom: 20,
   }
 });
 
