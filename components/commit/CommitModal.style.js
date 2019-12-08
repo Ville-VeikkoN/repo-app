@@ -14,7 +14,7 @@ const commitModalStyle = StyleSheet.create({
   image: {
     height: 90,
     width: 90,
-    marginTop: 2,
+    marginTop: 10,
     marginBottom: 2,
   },
   closeText: {
