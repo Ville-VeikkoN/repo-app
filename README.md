@@ -12,7 +12,9 @@ Redux is used in this project for learning purposes about predictable state cont
 
 ## Technologies
 Project is created with:
-* React Native
+* React Native "0.59.8"
+* React "16.8.3"
+* Expo "35.0.1"
 
 ## Usage
 ![](RepoApp.gif)
