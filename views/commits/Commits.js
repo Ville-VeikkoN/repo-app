@@ -67,7 +67,7 @@ export default function Commits({navigation}) {
               <Card containerStyle={styles.cardContainer}>
                 <View style={styles.flatList}>
                   <Text style={styles.cardTitle}>{item.commit.author.name}</Text>
-                  <Text style={{fontSize: 13}}>{getParsedDate(item.commit.author.date)}</Text>
+                  <Text style={styles.dateText}>{getParsedDate(item.commit.author.date)}</Text>
                 </View>
               </Card>
             </TouchableOpacity>}

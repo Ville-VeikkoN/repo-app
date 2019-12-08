@@ -44,7 +44,7 @@ export default function Repositories(props) {
           <Card containerStyle={styles.cardContainer}>
             <View style={styles.flatList}>
               <Text style={styles.cardTitle}>{item.name}</Text>
-              <Text style={{fontSize: 13}}>{getParsedDate(item.created_at)}</Text>
+              <Text style={styles.dateText}>{getParsedDate(item.created_at)}</Text>
             </View>
           </Card>
         </TouchableOpacity>

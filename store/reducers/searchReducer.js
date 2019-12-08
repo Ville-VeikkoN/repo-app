@@ -7,4 +7,6 @@ const searchReducer = (state = '', action) => {
     }
 }
 
+export const selectSearchValue = (state) => state.searchValue;
+
 export default searchReducer;

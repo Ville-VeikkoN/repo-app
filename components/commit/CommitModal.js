@@ -33,8 +33,8 @@ export default class CommitModal extends React.Component {
                   />
               }
               <Text style={styles.username}>{commit.commit.author.name}</Text>
-              <Text style={{fontSize:13, borderBottomColor:'gray', borderBottomWidth:1}}>Message</Text>
-              <Text style={{fontSize:20, textAlign:'center'}}>{commit.commit.message}</Text>
+              <Text style={commitModalStyle.infoTitle}>Message</Text>
+              <Text style={commitModalStyle.message}>{commit.commit.message}</Text>
               <TouchableOpacity onPress={() => this.props.handleClose()}>
                 <Text style={commitModalStyle.closeText}>close</Text>
               </TouchableOpacity>

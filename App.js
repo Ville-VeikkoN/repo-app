@@ -1,8 +1,7 @@
 import { createAppContainer } from 'react-navigation';
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import Search from './views/search/Search';
-import Repositories from './components/repositories/Repositories';
+import Main from './views/main/Main';
 import Commits from './views/commits/Commits';
 import { Provider } from 'react-redux';
 import store from './store/store';
@@ -33,10 +32,7 @@ const navigation = ({
 })
 
 const MainNavigation = createStackNavigator({
-  Search: { screen: Search,
-    navigationOptions: navigation
-  },
-  Repositories: { screen: Repositories,
+  Main: { screen: Main,
     navigationOptions: navigation
   },
   Commits: { screen: Commits,

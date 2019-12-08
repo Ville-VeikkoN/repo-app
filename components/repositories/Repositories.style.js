@@ -15,6 +15,9 @@ const repositoriesStyle = StyleSheet.create({
   accountContainer: {
     alignItems: 'center',
   },
+  date: {
+    fontSize: 13
+  }
 });
 
 export default repositoriesStyle;

@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 20,
     marginBottom: 20,
+  },
+  dateText: {
+    fontSize: 13
   }
 });
 
