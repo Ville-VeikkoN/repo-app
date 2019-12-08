@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "VincitRecruitment",
-    "slug": "recruitment",
+    "name": "RepoApp",
+    "slug": "RepoApp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
