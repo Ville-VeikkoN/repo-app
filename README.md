@@ -1,24 +1,29 @@
-# repo-app
+# weather-app
 
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Usage (gif)](#usage)
 * [Setup](#setup)
 
 ## General info
-Another project for my portfolio. Redux is used in this project to gain some experience about predictable state container. You can search wanted Github user and its repositories. From every repository 10 commits is displayed. From every commit you can find date, author, authors avatar and commit message.
+With this application you can search Github users and their repositories. From every repository you can find 10 commits with author and date. By clicking commit model opens and shows more information about commit (author avatar, commit message).
+Redux is used in this project for learning purposes about predictable state containers.
 
 ## Technologies
 Project is created with:
-* React native
+* React Native
+
+## Usage
+![](RepoApp.gif)
 	
 ## Setup
 To run the project:
   -clone project from github
-  -build and run it using expo.
+  -build and run it using expo and emulator or real device.
 
 ```
 $ cd ../<your folder>
-$ git clone https://github.com/Ville-VeikkoN/weather-app.git
+$ git clone https://github.com/Ville-VeikkoN/repo-app.git
 
 ```
