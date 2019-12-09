@@ -27,8 +27,7 @@ To run the project:
 ```
 $ cd ../<your folder>
 $ git clone https://github.com/Ville-VeikkoN/repo-app.git
-$ expo install
-$ npm install
-$ expo start
+$ yarn
+$ yarn start
 
 ```
